@@ -46,13 +46,17 @@ export default class StatusChart extends Component {
                 		case 'Resolved':
                 			this.resolved++;
                 			break;
+										default:
+											// nothing to do here
                 	}
 
                 	this.setState({ data: {
                 		datasets: [{
                 			data: [this.open, this.progress, this.resolved]
-        			 	}]
-        			}});
+        			 			}]
+        					}});
+									
+									return undefined;
                 });
             })
             .catch(error => console.log(error));

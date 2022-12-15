@@ -7,7 +7,7 @@ const Project = props => (
     <tr>
         <td>{props.project.name}</td>
         <td>
-            <a href="#" onClick={() => { 
+            <a href="delete-project" onClick={() => { 
                 if(window.confirm('Are you sure you want to delete this project?')) 
                     props.deleteProject(props.project._id) 
             }} 

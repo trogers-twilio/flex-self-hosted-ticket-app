@@ -51,14 +51,18 @@ export default class TypeChart extends Component {
 	                		case 'Other':
 	                			this.other++;
 	                			break;
+											default:
+												// nothing to do here
 	                	}
                 	}
 
                 	this.setState({ data: {
                 		datasets: [{
                 			data: [this.bug, this.feature, this.security, this.other]
-        			 	}]
-        			}});
+        			 			}]
+        					}});
+
+									return undefined;
                 });
             })
             .catch(error => console.log(error));

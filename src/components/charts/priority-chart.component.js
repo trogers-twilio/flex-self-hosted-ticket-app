@@ -57,14 +57,18 @@ export default class PriorityChart extends Component {
 	                		case 'High':
 	                			this.high++;
 	                			break;
+											default:
+												// nothing to do here
 	                	}
                 	}
 
                 	this.setState({ data: {
                 		datasets: [{
                 			data: [this.low, this.medium, this.high]
-        			 	}]
-        			}});
+        			 			}]
+        					}});
+
+									return undefined;
                 });
             })
             .catch(error => console.log(error));

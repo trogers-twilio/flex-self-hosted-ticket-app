@@ -11,6 +11,7 @@ export default class CreateTicket extends Component {
 
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.onChangePhone = this.onChangePhone.bind(this);
         this.onChangeProjectName = this.onChangeProjectName.bind(this);
         this.onChangeAssignee = this.onChangeAssignee.bind(this);
         this.onChangePriority = this.onChangePriority.bind(this);
@@ -21,13 +22,14 @@ export default class CreateTicket extends Component {
         this.state = { 
       		title: '',
   		    description: '',
+            phone: '',
   		    projectName: '',
-          assignee: '',
+            assignee: '',
   		    priority: '',
   		    status: '',
   		    type: '',
-          users: [],
-          projects: []
+            users: [],
+            projects: []
         };
     }
 
@@ -76,6 +78,12 @@ export default class CreateTicket extends Component {
         })
     }
 
+    onChangePhone(e) {
+        this.setState({
+            phone: e.target.value
+        })
+    }
+
     onChangeProjectName(e) {
         this.setState({
             projectName: e.target.value
@@ -112,6 +120,7 @@ export default class CreateTicket extends Component {
         const ticket = {
             title: this.state.title,
             description: this.state.description,
+            phone: this.state.phone,
             projectName: this.state.projectName,
             assignee: this.state.assignee,
             priority: this.state.priority,
@@ -128,6 +137,7 @@ export default class CreateTicket extends Component {
         this.setState({ 
           title: '',
           description: '',
+          phone: '',
           priority: '',
           status: '',
           type: ''
@@ -141,36 +151,44 @@ export default class CreateTicket extends Component {
 				<form onSubmit={this.onSubmit}>
 					<div className="form-group">
 						<label>Title: </label>
-            	<input type="text"
-                  className="form-control"
-                  value={this.state.title}
-                  onChange={this.onChangeTitle}
-            	/>
-					</div>
+                        <input type="text"
+                            className="form-control"
+                            value={this.state.title}
+                            onChange={this.onChangeTitle}
+                        />
+                    </div>
 					<div className="form-group">
 						<label>Description: </label>
-            	<textarea style={{resize: 'none'}}
-                  type="text"
-                  maxLength="250"
-                  rows="3"
-                  className="form-control"
-                  value={this.state.description}
-                  onChange={this.onChangeDescription}
-            	></textarea>
+                        <textarea style={{resize: 'none'}}
+                            type="text"
+                            maxLength="250"
+                            rows="3"
+                            className="form-control"
+                            value={this.state.description}
+                            onChange={this.onChangeDescription}
+                        ></textarea>
 					</div>
+                    <div className="form-group">
+						<label>Phone Number: </label>
+                        <input type="text"
+                            className="form-control"
+                            value={this.state.phone}
+                            onChange={this.onChangePhone}
+                        />
+                    </div>
 					<div className="form-group">
 						<label>Project Name: </label>
-            	<select className="form-control"
-                      value={this.state.projectName}
-                      onChange={this.onChangeProjectName}>
-                      {
-                          this.state.projects.map((project) => {
-                          return <option key={project}
-                                         value={project}>{project}
-                                 </option>;
-                          })
-                      }
-              </select>
+            	        <select className="form-control"
+                            value={this.state.projectName}
+                            onChange={this.onChangeProjectName}>
+                            {
+                                this.state.projects.map((project) => {
+                                return <option key={project}
+                                                value={project}>{project}
+                                        </option>;
+                                })
+                            }
+                        </select>
 					</div>
           <div className="form-group">
             <label>Assigned To: </label>

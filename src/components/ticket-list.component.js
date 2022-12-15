@@ -31,23 +31,29 @@ export default class TicketList extends Component {
 
 	getOpenList() {
         return this.state.tickets.map(currentTicket => {
-            if(currentTicket.status !== 'Resolved') 
+            if(currentTicket.status !== 'Resolved') {
                 return <Ticket 
             			ticket={currentTicket} 
             			deleteTicket={this.deleteTicket}
                         key={currentTicket._id}
                         />;
+            } else {
+                return undefined
+            }
         })
 	}
 
     getResolvedList() {
         return this.state.tickets.map(currentTicket => {
-            if(currentTicket.status === 'Resolved') 
+            if(currentTicket.status === 'Resolved') {
                 return <Ticket 
                         ticket={currentTicket} 
                         deleteTicket={this.deleteTicket}
                         key={currentTicket._id}
                         />;
+            } else {
+                return undefined
+            }
         })
     }
 
@@ -61,6 +67,7 @@ export default class TicketList extends Component {
                         <tr>
                             <th>Title</th>
                             <th>Description</th>
+                            <th>Phone</th>
                             <th>Project</th>
                             <th>Assigned To</th>
                             <th>Priority</th>
@@ -80,6 +87,7 @@ export default class TicketList extends Component {
                         <tr>
                             <th>Title</th>
                             <th>Description</th>
+                            <th>Phone</th>
                             <th>Project</th>
                             <th>Assigned To</th>
                             <th>Priority</th>

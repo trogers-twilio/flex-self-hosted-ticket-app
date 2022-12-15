@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 import MarkButton from './mark-button';
+import { placeOutboundCall } from '../twilio-flex/helpers';
 
 let getPriorities = (lvl) => {
     switch(lvl) {
@@ -23,6 +25,8 @@ export default class Ticket extends Component {
         this.state = {
             status: ''
         }
+
+        this.onPhoneClick = this.onPhoneClick.bind(this);
     }
 
     componentDidMount() {
@@ -32,6 +36,7 @@ export default class Ticket extends Component {
                 this.setState({
                     title: res.data.title,
                     description: res.data.description,
+                    phone: res.data.phone,
                     projectName: res.data.projectName,
                     assignee: res.data.assignee,
                     priority: res.data.priority,
@@ -42,9 +47,9 @@ export default class Ticket extends Component {
             .catch(error => console.log(error));
     }
 
-    onChangeStatus(e) {
-        // axios.post('http://localhost:5000/tickets/update/' + this.props.ticket._id, this.props.ticket)
-        //     .then(res => console.log(res.data));
+    onPhoneClick(e) {
+        console.debug('Phone number clicked event:', e);
+        placeOutboundCall(this.state.phone, { ticketNumber: this.props.ticket._id });
     }
 
     render() {
@@ -52,6 +57,11 @@ export default class Ticket extends Component {
             <tr>
                 <td>{this.props.ticket.title}</td>
                 <td>{this.props.ticket.description}</td>
+                <td><div 
+                        className='click-to-dial-button'
+                        onClick={this.onPhoneClick}
+                    >{this.props.ticket.phone}</div>
+                </td>
                 <td>{this.props.ticket.projectName}</td>
                 <td>{this.props.ticket.assignee}</td>
                 { getPriorities(this.props.ticket.priority) }
@@ -60,7 +70,7 @@ export default class Ticket extends Component {
                 <td>
                     <Link to={"/edit/"+this.props.ticket._id} className="badge badge-info">Edit</Link>
                     <br></br>
-                    <a href="#" onClick={() => { 
+                    <a href="delete-ticket" onClick={() => { 
                         if(window.confirm('Are you sure you want to delete this ticket?')) 
                             this.props.deleteTicket(this.props.ticket._id) 
                     }} 

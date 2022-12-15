@@ -14,6 +14,7 @@ router.route('/').get((req, res) => {
 router.route('/create').post((req, res) => { 
 	const title = req.body.title;
     const description = req.body.description;
+    const phone = req.body.phone;
     const projectName = req.body.projectName;
     const assignee = req.body.assignee;
     const priority = req.body.priority;
@@ -23,6 +24,7 @@ router.route('/create').post((req, res) => {
     const newTicket = new Ticket({
     	title,
     	description,
+        phone,
     	projectName,
         assignee,
     	priority,
@@ -48,6 +50,7 @@ router.route('/update/:id').post((req,res) => {
         .then(ticket => {
 	    	ticket.title = req.body.title;
 	    	ticket.description = req.body.description;
+            ticket.phone = req.body.phone;
 	    	ticket.projectName = req.body.projectName;
             ticket.assignee = req.body.assignee;
 	    	ticket.priority = req.body.priority;

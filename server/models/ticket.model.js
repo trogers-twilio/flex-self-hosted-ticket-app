@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const ticketSchema = new Schema({
 	title: { type: String, required: true },
     description: { type: String, required: true },
+    phone: { type: String, required: true},
     projectName: { type: String, required: true },
     assignee: { type: String, required: true},
     priority: { type: String, required: true },

@@ -11,6 +11,7 @@ export default class EditTicket extends Component {
 
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.onChangePhone = this.onChangePhone.bind(this);
         this.onChangeProjectName = this.onChangeProjectName.bind(this);
         this.onChangeAssignee = this.onChangeAssignee.bind(this);
         this.onChangePriority = this.onChangePriority.bind(this);
@@ -21,13 +22,14 @@ export default class EditTicket extends Component {
         this.state = { 
       		title: '',
   		    description: '',
+            phone: '',
   		    projectName: '',
-          assignee: '',
+            assignee: '',
   		    priority: '',
   		    status: '',
   		    type: '',
-          users: [],
-          projects: []
+            users: [],
+            projects: []
         };
     }
 
@@ -38,6 +40,7 @@ export default class EditTicket extends Component {
                 this.setState({
                     title: res.data.title,
                     description: res.data.description,
+                    phone: res.data.phone,
                     projectName: res.data.projectName,
                     assignee: res.data.assignee,
                     priority: res.data.priority,
@@ -82,6 +85,12 @@ export default class EditTicket extends Component {
         })
     }
 
+    onChangePhone(e) {
+        this.setState({
+            phone: e.target.value
+        })
+    }
+
     onChangeProjectName(e) {
         this.setState({
             projectName: e.target.value
@@ -118,6 +127,7 @@ export default class EditTicket extends Component {
     	const ticket = {
             title: this.state.title,
             description: this.state.description,
+            phone: this.state.phone,
             projectName: this.state.projectName,
             assignee: this.state.assignee,
             priority: this.state.priority,
@@ -152,6 +162,15 @@ export default class EditTicket extends Component {
                                className="form-control"
                                value={this.state.description}
                                onChange={this.onChangeDescription}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Phone: </label>
+                        <input type="text"
+                               required
+                               className="form-control"
+                               value={this.state.phone}
+                               onChange={this.onChangePhone}
                         />
                     </div>
                     <div className="form-group">

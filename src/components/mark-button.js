@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 export default class MarkButton extends React.Component {
@@ -85,9 +85,9 @@ export default class MarkButton extends React.Component {
 	render() {
 		return(
             this.state.status !== 'Resolved' ? 
-            <a href="#" onClick={this.handleClick} 
+            <a href="mark-resolved" onClick={this.handleClick} 
             className="badge badge-success">Mark as Resolved</a> :
-            <a href="#" onClick={this.handleClick}
+            <a href="mark-open" onClick={this.handleClick}
             className="badge badge-secondary">Mark as Open</a>          
 		);
 	}
